@@ -41,6 +41,7 @@
 		<beans:property name="annotatedClasses">
 			<beans:list>
 				<beans:value>com.micro.finance.model.Customer</beans:value>
+				<beans:value>com.micro.finance.model.FieldOfficer</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
@@ -58,6 +59,15 @@
 	<beans:bean id="customerService" class="com.micro.finance.service.CustomerServiceImpl">
 		<beans:property name="customerDao" ref="customerDao"></beans:property>
 	</beans:bean>
+
+	<beans:bean id="fieldOfficerDao" class="com.micro.finance.dao.FieldOfficerDaoImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="fieldOfficerService" class="com.micro.finance.service.FieldOfficerServiceImpl">
+		<beans:property name="fieldOfficerDao" ref="fieldOfficerDao"></beans:property>
+	</beans:bean>
+
+
 	<context:component-scan base-package="com.micro.finance" />
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>

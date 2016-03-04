@@ -108,8 +108,8 @@
 			<td>${customer.name}</td>
 			<td>${customer.address}</td>
 			<td>${customer.telNo}</td>
-			<td><a href="<c:url value='/edit/${customer.id}' />" >Edit</a></td>
-			<td><a href="<c:url value='/remove/${customer.id}' />" >Delete</a></td>
+			<td><a href="<c:url value='/customer/edit/${customer.id}' />" >Edit</a></td>
+			<td><a href="<c:url value='/customer/remove/${customer.id}' />" >Delete</a></td>
 		</tr>
 	</c:forEach>
 	</table>

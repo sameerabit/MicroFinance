@@ -50,14 +50,14 @@ public class CustomerController {
 
     }
 
-    @RequestMapping("/remove/{id}")
+    @RequestMapping("/customer/remove/{id}")
     public String removeCustomer(@PathVariable("id") int id){
 
         this.customerService.removeCustomer(id);
         return "redirect:/customers";
     }
 
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/customer/edit/{id}")
     public String editCustomer(@PathVariable("id") int id, Model model){
         model.addAttribute("customer", this.customerService.getCustomer(id));
         //model.addAttribute("listCustomer", this.customerService.listCustomer());

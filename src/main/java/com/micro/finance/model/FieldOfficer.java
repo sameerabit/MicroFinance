@@ -30,6 +30,18 @@ public class FieldOfficer {
     @Temporal(TemporalType.TIMESTAMP)
     private Date addedDate = new Date();
 
+    @ManyToOne
+    private Branch branch;
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
+
+
 
 
     public int getId() {

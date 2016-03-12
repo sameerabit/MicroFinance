@@ -45,6 +45,17 @@
             </tr>
         </c:if>
         <tr>
+            <td> <form:label path="branch">
+                <spring:message text="Branch"/>
+            </form:label></td>
+            <td>
+                <form:select path="branch.id">
+                    <form:option value="0" label="-----Select------" />
+                    <form:options items="${listBranch}" itemValue="id" itemLabel="name" />
+                </form:select>
+            </td>
+        </tr>
+        <tr>
             <td>
                 <form:label path="name">
                     <spring:message text="Name"/>

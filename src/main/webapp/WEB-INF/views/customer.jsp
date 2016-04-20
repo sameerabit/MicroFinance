@@ -56,6 +56,16 @@
 	</tr>
 	<tr>
 		<td>
+			<form:label path="nicNo">
+				<spring:message text="NIC No"/>
+			</form:label>
+		</td>
+		<td>
+			<form:input path="nicNo" />
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<form:label path="address">
 				<spring:message text="Address"/>
 			</form:label>
@@ -72,6 +82,16 @@
 		</td>
 		<td>
 			<form:input path="telNo" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<form:label path="fax">
+				<spring:message text="Fax"/>
+			</form:label>
+		</td>
+		<td>
+			<form:input path="fax" />
 		</td>
 	</tr>
 	<tr>
@@ -94,10 +114,12 @@
 	<table class="tg">
 	<tr>
 		<th width="80">ID</th>
+		<th width="120">Code</th>
 		<th width="120">Name</th>
+		<th width="120">NIC No</th>
 		<th width="120">Address</th>
 		<th width="120">Tel No</th>
-		<th width="120">Code</th>
+		<th width="120">Fax</th>
 		<th width="60">Edit</th>
 		<th width="60">Delete</th>
 	</tr>
@@ -106,8 +128,10 @@
 			<td>${customer.id}</td>
 			<td>${customer.code}</td>
 			<td>${customer.name}</td>
+			<td>${customer.nicNo}</td>
 			<td>${customer.address}</td>
 			<td>${customer.telNo}</td>
+			<td>${customer.fax}</td>
 			<td><a href="<c:url value='/customer/edit/${customer.id}' />" >Edit</a></td>
 			<td><a href="<c:url value='/customer/remove/${customer.id}' />" >Delete</a></td>
 		</tr>

@@ -49,7 +49,7 @@
                 <spring:message text="Branch"/>
             </form:label></td>
             <td>
-                <form:select path="branch">
+                <form:select path="branch.id">
                     <form:option value="0" label="-----Select------" />
                     <form:options items="${listBranch}" itemValue="id" itemLabel="name" />
                 </form:select>

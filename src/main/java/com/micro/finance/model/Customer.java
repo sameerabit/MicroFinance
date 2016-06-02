@@ -31,7 +31,7 @@ public class Customer {
     @Column(name="telNo")
     private int telNo;
 
-    @Column(name="cuscode")
+    @Column(name="code")
     private String code;
 
     @Temporal(TemporalType.TIMESTAMP)

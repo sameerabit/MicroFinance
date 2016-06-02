@@ -33,6 +33,7 @@ public class BranchDaoImpl implements BranchDao {
     @Override
     public void updateBranch(Branch branch) {
         Session currentSession = sessionFactory.getCurrentSession();
+        logger.info("Person Details="+branch);
         currentSession.update(branch);
     }
 

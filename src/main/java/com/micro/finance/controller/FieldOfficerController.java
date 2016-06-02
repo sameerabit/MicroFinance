@@ -77,7 +77,8 @@ public class FieldOfficerController {
     @RequestMapping("/fieldOfficer/edit/{id}")
     public String editFieldOfficer(@PathVariable("id") int id, Model model){
         model.addAttribute("fieldOfficer", this.fieldOfficerService.getFieldOfficer(id));
-        //model.addAttribute("listFieldOfficer", this.fieldOfficerService.listFieldOfficer());
+        model.addAttribute("listFieldOfficer", this.fieldOfficerService.listFieldOfficer());
+        model.addAttribute("listBranch",this.branchService.listBranch());
         return "fieldOfficer";
     }
 

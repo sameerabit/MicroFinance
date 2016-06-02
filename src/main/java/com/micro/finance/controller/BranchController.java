@@ -35,14 +35,14 @@ public class BranchController {
     }
 
     @RequestMapping(value= "/branch/add", method = RequestMethod.POST)
-    public String addBranch(@ModelAttribute("branch") Branch p){
+    public String addBranch(@ModelAttribute("branch") Branch branch){
 
-        if(p.getId() == 0){
+        if(branch.getId() == 0){
             //new branch, add it
-            this.branchService.addBranch(p);
+            this.branchService.addBranch(branch);
         }else{
             //existing branch, call update
-            this.branchService.updateBranch(p);
+            this.branchService.updateBranch(branch);
         }
 
         return "redirect:/branches";
@@ -59,7 +59,7 @@ public class BranchController {
     @RequestMapping("/branch/edit/{id}")
     public String editBranch(@PathVariable("id") int id, Model model){
         model.addAttribute("branch", this.branchService.getBranch(id));
-        //model.addAttribute("listBranch", this.branchService.listBranch());
+        model.addAttribute("listBranch", this.branchService.listBranch());
         return "branch";
     }
 }

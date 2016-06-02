@@ -31,7 +31,6 @@
 
 <form:form action="${addAction}" commandName="branch">
     <table>
-        <c:if test="${!empty branch.name}">
             <tr>
                 <td>
                     <form:label path="id">
@@ -43,7 +42,6 @@
                     <form:hidden path="id" />
                 </td>
             </tr>
-        </c:if>
         <tr>
             <td>
                 <form:label path="name">
@@ -86,11 +84,11 @@
         </tr>
         <tr>
             <td colspan="2">
-                <c:if test="${!empty branch.name}">
+                <c:if test="${!empty branch.id}">
                     <input type="submit"
                            value="<spring:message text="Edit Branch"/>" />
                 </c:if>
-                <c:if test="${empty branch.name}">
+                <c:if test="${empty branch.id}">
                     <input type="submit"
                            value="<spring:message text="Add Branch"/>" />
                 </c:if>

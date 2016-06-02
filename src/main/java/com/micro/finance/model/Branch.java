@@ -1,9 +1,8 @@
 package com.micro.finance.model;
 
 import javax.persistence.*;
-import java.lang.annotation.Target;
+import javax.persistence.metamodel.Type;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by ssvh on 3/4/16.
@@ -14,7 +13,7 @@ public class Branch {
 
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
     @Column(name="name")
@@ -30,19 +29,28 @@ public class Branch {
     private String code;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date addedDate = new Date();
+    @Column(name = "created_at", insertable = true, updatable = false)
+    private Date createdAt = new Date();
 
-
-    public List getFieldOfficerList() {
-        return fieldOfficerList;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setFieldOfficerList(List fieldOfficerList) {
-        this.fieldOfficerList = fieldOfficerList;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    @OneToMany(targetEntity = Branch.class)
-    private List fieldOfficerList;
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at", insertable = false, updatable = true)
+    private Date updatedAt = new Date();
 
     public int getId() {
         return id;
@@ -84,17 +92,13 @@ public class Branch {
         this.code = code;
     }
 
-    @Column(name = "addedDate", insertable = true, updatable = false)
-    public Date getAddedDate() {
-        return addedDate;
-    }
-
-    public void setAddedDate(Date addedDate) {
-        this.addedDate = addedDate;
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
     }
 
     @PrePersist
-    protected void onCreate() {
-        this.addedDate = new Date();
+    protected void onUpdate() {
+        this.updatedAt = new Date();
     }
 }

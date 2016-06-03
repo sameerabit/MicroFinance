@@ -1,16 +1,16 @@
 package com.micro.finance.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by ssvh on 4/20/16.
  */
 @Entity
+@Table(name="Bank")
 public class Bank {
+
     private int id;
+    private String name;
     private String telNo;
     private String fax;
     private String address;
@@ -25,6 +25,16 @@ public class Bank {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Basic
@@ -104,4 +114,6 @@ public class Bank {
         result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
         return result;
     }
+
+
 }

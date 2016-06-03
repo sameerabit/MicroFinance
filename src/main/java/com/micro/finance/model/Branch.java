@@ -1,7 +1,6 @@
 package com.micro.finance.model;
 
 import javax.persistence.*;
-import javax.persistence.metamodel.Type;
 import java.util.Date;
 
 /**

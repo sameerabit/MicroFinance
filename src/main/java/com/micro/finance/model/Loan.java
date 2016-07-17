@@ -1,19 +1,21 @@
 package com.micro.finance.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.mapping.Collection;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by ssvh on 4/20/16.
  */
 @Entity
 public class Loan {
+
     private int id;
-    private int customerId;
     private Integer number;
+    private String date;
     private BigDecimal capital;
     private BigDecimal interest;
     private BigDecimal total;
@@ -28,14 +30,18 @@ public class Loan {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "Customer_id")
-    public int getCustomerId() {
-        return customerId;
+
+//    private Collection transferDetails;
+
+    private Customer customer;
+
+    @ManyToOne
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Basic
@@ -86,7 +92,6 @@ public class Loan {
         Loan loan = (Loan) o;
 
         if (id != loan.id) return false;
-        if (customerId != loan.customerId) return false;
         if (number != null ? !number.equals(loan.number) : loan.number != null) return false;
         if (capital != null ? !capital.equals(loan.capital) : loan.capital != null) return false;
         if (interest != null ? !interest.equals(loan.interest) : loan.interest != null) return false;
@@ -98,11 +103,27 @@ public class Loan {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + customerId;
         result = 31 * result + (number != null ? number.hashCode() : 0);
         result = 31 * result + (capital != null ? capital.hashCode() : 0);
         result = 31 * result + (interest != null ? interest.hashCode() : 0);
         result = 31 * result + (total != null ? total.hashCode() : 0);
         return result;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+//    @OneToMany(mappedBy = "loan")
+//    public Collection getTransferDetails() {
+//        return transferDetails;
+//    }
+//
+//    public void setTransferDetails(Collection transferDetails) {
+//        this.transferDetails = transferDetails;
+//    }
 }

@@ -1,19 +1,30 @@
 package com.micro.finance.controller;
 
 
+import com.micro.finance.model.Customer;
+import com.micro.finance.model.FieldOfficer;
 import com.micro.finance.model.Loan;
+import com.micro.finance.model.TransferDetail;
 import com.micro.finance.service.CustomerService;
+import com.micro.finance.service.FieldOfficerService;
 import com.micro.finance.service.LoanService;
+import com.micro.finance.service.TransferDetailService;
+import org.hibernate.MappingException;
+import org.hibernate.mapping.ValueVisitor;
+import org.hibernate.type.CollectionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by ssvh on 3/4/16.
@@ -25,6 +36,10 @@ public class LoanController {
     private LoanService loanService;
 
     private CustomerService customerService;
+
+    private FieldOfficerService fieldOfficerService;
+
+    private TransferDetailService transferDetailService;
 
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
@@ -42,24 +57,43 @@ public class LoanController {
         this.customerService = customerService;
     }
 
+    @Autowired(required = true)
+    @Qualifier(value="fieldOfficerService")
+    public void setFieldOfficerService(FieldOfficerService fieldOfficerService){
+        this.fieldOfficerService = fieldOfficerService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value="transferDetailService")
+    public void setFieldOfficerService(TransferDetailService transferDetailService){
+        this.transferDetailService = transferDetailService;
+    }
+
     @RequestMapping(value = "/loans", method = RequestMethod.GET)
-    public String ListLoans(Model model)
+    public String ListLoans(ModelMap model)
     {
-        model.addAttribute("loan", new Loan());
-        model.addAttribute("listLoan", this.loanService.listLoan());
-        model.addAttribute("listCustomer",this.customerService.listCustomer());
+        model.put("loan", new Loan());
+        model.put("transferDetail",new TransferDetail());
+        model.put("listTransferDetail", this.transferDetailService.listTransferDetail());
+        model.put("listLoan", this.loanService.listLoan());
+        model.put("listCustomer",this.customerService.listCustomer());
+        model.put("listFieldOfficer",this.fieldOfficerService.listFieldOfficer());
         return "loan";
     }
 
     @RequestMapping(value= "/loan/add", method = RequestMethod.POST)
-    public String addLoan(@ModelAttribute("loan") Loan officer){
-        if(officer.getId() == 0){
-            //new loan, add it
-            this.loanService.addLoan(officer);
-        }else{
-            //existing loan, call update
-            this.loanService.updateLoan(officer);
-        }
+    public String addLoan(
+            @ModelAttribute("transferDetail") TransferDetail transferDetail,
+            @RequestParam Map<String,String> allRequestParams){
+        transferDetail.setReason("ordinary method");
+       // transferDetail.getLoan().setTransferDetails(transferDetails);
+        //if(transferDetail.getLoan().getId() == 0){
+            //new transferDetail, add it
+          //  this.transferDetailService.addTransferDetail(transferDetail);
+        //}else{
+            //existing transferDetail, call update
+         //   this.transferDetailService.addTransferDetail(transferDetail);
+        //}
 
         return "redirect:/loans";
 
@@ -77,6 +111,7 @@ public class LoanController {
         model.addAttribute("loan", this.loanService.getLoan(id));
         model.addAttribute("listLoan", this.loanService.listLoan());
         model.addAttribute("listCustomer",this.customerService.listCustomer());
+        model.addAttribute("listFieldOfficer",this.fieldOfficerService.listFieldOfficer());
         return "loan";
     }
 

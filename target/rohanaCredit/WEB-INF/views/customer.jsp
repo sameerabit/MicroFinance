@@ -21,6 +21,7 @@
 
 <form:form action="${addAction}" commandName="customer">
 <table>
+	<c:if test="${!empty customer.name}">
 	<tr>
 		<td>
 			<form:label path="id">
@@ -32,6 +33,7 @@
 			<form:hidden path="id" />
 		</td> 
 	</tr>
+	</c:if>
 	<tr>
 		<td>
 			<form:label path="name">

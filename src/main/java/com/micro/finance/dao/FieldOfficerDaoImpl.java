@@ -41,11 +41,11 @@ public class FieldOfficerDaoImpl implements FieldOfficerDao {
     @Override
     public List<FieldOfficer> listFieldOfficer() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<FieldOfficer> personsList = session.createQuery("from FieldOfficer").list();
-        for(FieldOfficer fieldOfficer : personsList){
+        List<FieldOfficer> fieldOfficerList = session.createQuery("from FieldOfficer").list();
+        for(FieldOfficer fieldOfficer : fieldOfficerList){
             logger.info("FieldOfficer List::"+fieldOfficer);
         }
-        return personsList;
+        return fieldOfficerList;
     }
 
     @Override

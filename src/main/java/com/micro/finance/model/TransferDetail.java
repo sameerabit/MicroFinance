@@ -1,36 +1,41 @@
 package com.micro.finance.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by ssvh on 4/20/16.
  */
 @Entity
-@IdClass(TransferDetailPK.class)
-public class TransferDetail {
-    private int fieldOfficerId;
-    private int loanId;
+@Table(name="TransferDetail")
+public class TransferDetail implements Serializable {
     private String reason;
+    private String date;
+
+    private FieldOfficer fieldOfficer;
 
     @Id
-    @Column(name = "FieldOfficer_id")
-    public int getFieldOfficerId() {
-        return fieldOfficerId;
+    @ManyToOne
+    public FieldOfficer getFieldOfficer() {
+        return fieldOfficer;
     }
 
-    public void setFieldOfficerId(int fieldOfficerId) {
-        this.fieldOfficerId = fieldOfficerId;
+    public void setFieldOfficer(FieldOfficer fieldOfficer) {
+        this.fieldOfficer = fieldOfficer;
     }
+
+    private Loan loan;
 
     @Id
-    @Column(name = "Loan_id")
-    public int getLoanId() {
-        return loanId;
+    @ManyToOne()
+    public Loan getLoan() {
+        return loan;
     }
 
-    public void setLoanId(int loanId) {
-        this.loanId = loanId;
+    public void setLoan(Loan loan) {
+        this.loan = loan;
     }
+
 
     @Basic
     @Column(name = "Reason")
@@ -42,25 +47,11 @@ public class TransferDetail {
         this.reason = reason;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TransferDetail that = (TransferDetail) o;
-
-        if (fieldOfficerId != that.fieldOfficerId) return false;
-        if (loanId != that.loanId) return false;
-        if (reason != null ? !reason.equals(that.reason) : that.reason != null) return false;
-
-        return true;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    @Override
-    public int hashCode() {
-        int result = fieldOfficerId;
-        result = 31 * result + loanId;
-        result = 31 * result + (reason != null ? reason.hashCode() : 0);
-        return result;
+    public String getDate() {
+        return date;
     }
 }

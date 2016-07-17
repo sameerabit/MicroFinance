@@ -51,7 +51,7 @@ public class LoanDaoImpl implements LoanDao {
     @Override
     public Loan getLoan(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Loan loan = (Loan) session.load(Loan.class, new Integer(id));
+        Loan loan = (Loan) session.load(Loan.class, id);
         logger.info("Loan loaded successfully, Loan details="+loan);
         return loan;
     }
@@ -59,7 +59,7 @@ public class LoanDaoImpl implements LoanDao {
     @Override
     public void removeLoan(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Loan loan = (Loan) session.load(Loan.class, new Integer(id));
+        Loan loan = (Loan) session.load(Loan.class, id);
         if(null != loan){
             session.delete(loan);
         }

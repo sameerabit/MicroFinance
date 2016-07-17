@@ -43,6 +43,9 @@
 				<beans:value>com.micro.finance.model.Customer</beans:value>
 				<beans:value>com.micro.finance.model.FieldOfficer</beans:value>
 				<beans:value>com.micro.finance.model.Branch</beans:value>
+				<beans:value>com.micro.finance.model.Bank</beans:value>
+				<beans:value>com.micro.finance.model.Loan</beans:value>
+				<beans:value>com.micro.finance.model.TransferDetail</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
@@ -75,6 +78,28 @@
 		<beans:property name="branchDao" ref="branchDao"></beans:property>
 	</beans:bean>
 
+	<beans:bean id="bankDao" class="com.micro.finance.dao.BankDaoImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="bankService" class="com.micro.finance.service.BankServiceImpl">
+		<beans:property name="bankDao" ref="bankDao"></beans:property>
+	</beans:bean>
+
+    <beans:bean id="loanDao" class="com.micro.finance.dao.LoanDaoImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+
+	<beans:bean id="loanService" class="com.micro.finance.service.LoanServiceImpl">
+		<beans:property name="loanDao" ref="loanDao"></beans:property>
+	</beans:bean>
+
+	<beans:bean id="transferDetailDao" class="com.micro.finance.dao.TransferDetailDaoImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+
+	<beans:bean id="transferDetailService" class="com.micro.finance.service.TransferDetailServiceImpl">
+		<beans:property name="transferDetailDao" ref="transferDetailDao"></beans:property>
+	</beans:bean>
 
 	<context:component-scan base-package="com.micro.finance" />
 	
